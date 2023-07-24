@@ -37,7 +37,14 @@ const BarcodeScanner = () => {
       console.log(response.data.message);
 
     } catch (error) {
-      console.log(error);
+      Swal.fire({
+        position: 'top-center',
+        icon: 'error',
+        title: 'Oops...',
+        text: error.message,
+        showConfirmButton: false,
+        timer: 1500
+      });
     }
   }
 
