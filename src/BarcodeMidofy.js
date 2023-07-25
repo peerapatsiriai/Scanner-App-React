@@ -2,6 +2,11 @@ import React, { useEffect, useRef } from 'react';
 import Axios from 'axios';
 import Swal from 'sweetalert2';
 import { useAppContext } from './AppContext'; // Import context here
+import { Grid } from '@mui/material';
+import Typography from '@mui/material/Typography';
+import Card from '@mui/material/Card';
+import { Link } from 'react-router-dom';
+import Button from '@mui/material/Button';
 
 const BarcodeScanner = () => {
   const { scannedValues, setScannedValues } = useAppContext(); // Replace local state with context
@@ -81,25 +86,50 @@ const BarcodeScanner = () => {
 
   return (
     <div>
-      <header>
-        <h1>Barcode Scanner Modify App</h1>
-      </header>
-      <main>
-        <div className='scanned-values'>
-          <h2>Scanned Values:</h2>
-          <ul>
-            {scannedValues.map((value, index) => (
-              <li key={index}>{value}</li>
-            ))}
-          </ul>
-        </div>
-        <input
-          ref={inputRef}
-          type='text'
-          style={{ position: 'absolute', left: '-9999px' }}
-        />
-      </main>
-      <footer>{/* Add any footer content you may need */}</footer>
+      <Grid
+        container
+        justifyContent='center'
+      >
+        <Grid
+          item
+          xs={12}
+          sx={{ mt: '15vh', mb: '25px', display: 'flex', justifyContent: 'center' }}
+        >
+          <Typography variant='h5'>Barcode Scanner Modify App</Typography>
+        </Grid>
+        <Grid
+          item
+          xs={12}
+          md={6}
+        >
+          <Card sx={{ padding: '20px', margin: '10px' }}>
+            <div style={{ display: 'flex', justifyContent: 'center' }}>
+              <h2>Scanned Values:</h2>
+            </div>
+            <ul>
+              {scannedValues.map((value, index) => (
+                <li key={index}>{value}</li>
+              ))}
+            </ul>
+          </Card>
+          <input
+            ref={inputRef}
+            type='text'
+            style={{ position: 'absolute', left: '-9999px' }}
+          />
+        </Grid>
+      </Grid>
+      <Link
+        to='/'
+        style={{ textDecoration: 'none', display: 'flex', justifyContent: 'center' }}
+      >
+        <Button
+          variant='outlined'
+          color='error'
+        >
+          ย้อนกลับ
+        </Button>
+      </Link>
     </div>
   );
 };
