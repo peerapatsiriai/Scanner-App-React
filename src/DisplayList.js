@@ -15,20 +15,20 @@ const ItemList = () => {
         console.error('Error fetching data:', error);
       }
     };
-
     fetchData();
+    setInterval(() => {
+      fetchData();
+      console.log(1);
+    }, 5000);
+    
   }, []);
 
   return (
     <div>
       <h1>Item List</h1>
-      <ul>
         {items.map(item => (
-          <li key={item.id}>
-            <h1>{item.item_name} : {item.item_price} </h1>
-          </li>
+            <h1 key={item.id}>ID: {item.name} Name: {item.item_name} </h1>
         ))}
-      </ul>
     </div>
   );
 };

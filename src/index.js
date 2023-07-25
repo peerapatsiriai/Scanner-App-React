@@ -4,6 +4,7 @@ import ReactDOM from 'react-dom';
 import BarcodeScanner from './BarcodeMidofy'; // Make sure you import the correct component name
 import DisplayList from './DisplayList';
 import MenuSelector from './MemuSelect';
+import Test from './testsocket';
 import { AppContextProvider } from './AppContext';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
