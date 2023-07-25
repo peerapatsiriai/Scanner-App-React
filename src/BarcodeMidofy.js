@@ -11,31 +11,30 @@ const BarcodeScanner = () => {
   const addnewitem = async (url, value) => {
     try {
       const data = {
-        "item_name": value,
-        "item_price": Number(value) / 2
+        item_name: value,
+        item_price: Number(value) / 2,
       };
       const response = await Axios.post(url, data);
 
-      if(!response){
+      if (!response) {
         Swal.fire({
           position: 'top-center',
           icon: 'error',
           title: 'Oops...',
           text: 'Something went wrong!',
           showConfirmButton: false,
-          timer: 1500
+          timer: 1500,
         });
       } else {
-          Swal.fire({
+        Swal.fire({
           position: 'top-center',
           icon: 'success',
           title: 'Your work has been saved',
           showConfirmButton: false,
-          timer: 700
-        })
+          timer: 700,
+        });
       }
       console.log(response.data.message);
-
     } catch (error) {
       Swal.fire({
         position: 'top-center',
@@ -43,10 +42,10 @@ const BarcodeScanner = () => {
         title: 'Oops...',
         text: error.message,
         showConfirmButton: false,
-        timer: 1500
+        timer: 1500,
       });
     }
-  }
+  };
 
   useEffect(() => {
     const handleBarcodeKeyDown = async (event) => {
@@ -55,14 +54,14 @@ const BarcodeScanner = () => {
           await setScannedValues((prevValues) => [...prevValues, inputRef.current.value.trim()]);
           await addnewitem(url_insert, inputRef.current.value.trim()); // Send data to the API
           inputRef.current.value = ''; // Clear the input field after scanning
-        } else{
+        } else {
           Swal.fire({
             position: 'top-center',
             icon: 'error',
             title: 'Oops...',
             text: 'Something went wrong Plese restart the page!',
             showConfirmButton: false,
-            timer: 1500
+            timer: 1500,
           });
         }
       }
@@ -81,12 +80,12 @@ const BarcodeScanner = () => {
   }, []); // Dependency array is still empty as useEffect runs once on mount and on unmount
 
   return (
-    <div className="barcode-scanner-app">
+    <div>
       <header>
         <h1>Barcode Scanner Modify App</h1>
       </header>
       <main>
-        <div className="scanned-values">
+        <div className='scanned-values'>
           <h2>Scanned Values:</h2>
           <ul>
             {scannedValues.map((value, index) => (
@@ -96,13 +95,11 @@ const BarcodeScanner = () => {
         </div>
         <input
           ref={inputRef}
-          type="text"
+          type='text'
           style={{ position: 'absolute', left: '-9999px' }}
         />
       </main>
-      <footer>
-        {/* Add any footer content you may need */}
-      </footer>
+      <footer>{/* Add any footer content you may need */}</footer>
     </div>
   );
 };
