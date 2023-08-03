@@ -7,6 +7,7 @@ import Typography from '@mui/material/Typography';
 import Card from '@mui/material/Card';
 import { Link } from 'react-router-dom';
 import Button from '@mui/material/Button';
+import axios from 'axios';
 
 const BarcodeScanner = () => {
   const { scannedValues, setScannedValues } = useAppContext(); // Replace local state with context
@@ -17,7 +18,7 @@ const BarcodeScanner = () => {
     try {
       const data = {
         item_name: value,
-        item_price: Number(value) / 2,
+        item_price: Math.floor(Math.random() * 10)
       };
       const response = await Axios.post(url, data);
 
@@ -38,9 +39,11 @@ const BarcodeScanner = () => {
           showConfirmButton: false,
           timer: 700,
         });
+        await axios.get('http://localhost:3205/printbill',{ params: data })
       }
       console.log(response.data.message);
     } catch (error) {
+      console.log(error);
       Swal.fire({
         position: 'top-center',
         icon: 'error',

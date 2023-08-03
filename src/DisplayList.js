@@ -15,17 +15,15 @@ const ItemList = () => {
     const fetchData = async () => {
       try {
         const response = await axios.get('http://111.223.38.19/api/method/frappe.pi.getallitem'); // Replace with your API
-        console.log(response.data.message.Data);
         setItems(response.data.message.Data); // Assuming the API response is an array of items
       } catch (error) {
         console.error('Error fetching data:', error);
       }
     };
     fetchData();
-    setInterval(() => {
-      fetchData();
-      console.log(1);
-    }, 5000);
+    // setInterval(() => {
+    //   fetchData();
+    // }, 5000);
   }, []);
 
   //Table
